@@ -15,6 +15,6 @@ public class Agent : MonoBehaviour
     {
         agent.SetDestination(followTarget.position);
         //if problem with error agent not touching the floor ;
-        agent.Move(-transform.position);
+        //agent.Move(-transform.position);
     }
 }
