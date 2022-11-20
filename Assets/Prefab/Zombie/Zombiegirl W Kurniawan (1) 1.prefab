@@ -1089,6 +1089,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2635527929762532242}
   - component: {fileID: 1640263209670336014}
+  - component: {fileID: 2310555135355443060}
   m_Layer: 0
   m_Name: Zombiegirl W Kurniawan (1) 1
   m_TagString: Untagged
@@ -1135,6 +1136,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &2310555135355443060
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3447670565440950568}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.67, y: 1.7252424, z: 1}
+  m_Center: {x: 0, y: 0.8047005, z: 0}
 --- !u!1 &3570385331235838868
 GameObject:
   m_ObjectHideFlags: 0
@@ -1517,6 +1531,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8286575242170128657}
+  - component: {fileID: 6608144090129928533}
   m_Layer: 0
   m_Name: mixamorig:Head
   m_TagString: Untagged
@@ -1542,6 +1557,19 @@ Transform:
   m_Father: {fileID: 8752053711115153515}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &6608144090129928533
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4926557909647617821}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.19035043
+  m_Center: {x: 0.00614807, y: 0.041755736, z: -5.833747e-11}
 --- !u!1 &4983702027076782553
 GameObject:
   m_ObjectHideFlags: 0
