@@ -21,7 +21,7 @@ public class CheckPointManager : IFlow
     private CheckPointManager() { }
     #endregion
 
-    GameObject checkPoints;
+    GameObject checkPoint;
     Transform camPos;
     List<CheckPoint> list = new List<CheckPoint>();
     int indexCurrentCheckPoint = 0;
@@ -30,11 +30,11 @@ public class CheckPointManager : IFlow
     {
         camPos = Camera.main.transform;
 
-        int nbOfChild = checkPoints.transform.childCount;
+        int nbOfChild = checkPoint.transform.childCount;
 
         for (int i = 0; i < nbOfChild; i++)
         {
-            CheckPoint cp = checkPoints.transform.GetComponentInChildren<CheckPoint>();
+            CheckPoint cp = checkPoint.transform.GetComponentInChildren<CheckPoint>();
             list.Add(cp);
         }
     }
