@@ -23,7 +23,7 @@ public class CheckPointManager : IFlow
 
     GameObject checkPoint;
     Transform camPos;
-    List<CheckPoint> list = new List<CheckPoint>();
+    public List<CheckPoint> list = new List<CheckPoint>();
     int indexCurrentCheckPoint = 0;
 
     public void PreInitialize()
@@ -41,7 +41,7 @@ public class CheckPointManager : IFlow
 
     public void Initialize()
     {
-        list[indexCurrentCheckPoint].MoveToCheckPoint(camPos);
+        //list[indexCurrentCheckPoint].MoveToCheckPoint(camPos);
     }
 
     public void Refresh()
@@ -56,20 +56,29 @@ public class CheckPointManager : IFlow
     public void EndGame()
     {
     }
-    public void GoToNextCheckPoint()
-    {
-        indexCurrentCheckPoint++;
-        list[indexCurrentCheckPoint].MoveToCheckPoint(camPos);
+    //public void GoToNextCheckPoint()
+    //{
+    //    indexCurrentCheckPoint++;
+    //    list[indexCurrentCheckPoint].MoveToCheckPoint(camPos);
 
-        if (indexCurrentCheckPoint == list.Count - 1)
-        {
-            LevelFinished();
-        }
+    //    if (indexCurrentCheckPoint == list.Count - 1)
+    //    {
+    //        LevelFinished();
+    //    }
 
-    }
+    //}
 
     public void LevelFinished()
     {
 
+    }
+
+    public Vector3 GetTargetCheckPoint()
+    {
+       return list[indexCurrentCheckPoint].transform.position;
+    }
+    public Transform GetTransformCheckPoint()
+    {
+        return list[indexCurrentCheckPoint].transform;
     }
 }

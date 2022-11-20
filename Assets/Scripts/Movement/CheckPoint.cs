@@ -9,14 +9,7 @@ public class CheckPoint : MonoBehaviour
     bool arrived = false;
     Transform spawnArea;
 
-    public void MoveToCheckPoint(Transform camPosition)
-    {
-        while (!arrived)
-        {
-            //Timer to lerp from current player position to checkpoint position
-
-        }
-    }
+    
     public void ArrivedAtCheckPoint()
     {
         arrived = true;

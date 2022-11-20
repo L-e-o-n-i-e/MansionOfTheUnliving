@@ -1935,6 +1935,8 @@ GameObject:
   - component: {fileID: 7766812248629812816}
   - component: {fileID: 7677261510820742484}
   - component: {fileID: 3417089291461744240}
+  - component: {fileID: -1245673498140346719}
+  - component: {fileID: 8152476366625279364}
   m_Layer: 0
   m_Name: Whiteclown N Hallin (2) 1
   m_TagString: Untagged
@@ -1992,6 +1994,41 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 1.8, z: 1}
   m_Center: {x: 0, y: 0.83, z: 0}
+--- !u!195 &-1245673498140346719
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6954281554131272938}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &8152476366625279364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6954281554131272938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d85535da9c57940897a97ad6eccd54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followTarget: {fileID: 4365891160774620705, guid: f594325b01f6ed9448daaf446e0f894a, type: 3}
 --- !u!1 &7074474494890266830
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,17 +11,32 @@ If player bullet hits an enemy, it makes a squish sound, if it misses, it makes 
 public class Player : MonoBehaviour
 {
     Camera playerCamera;
-    NavMeshAgent agent;
-
-    void Start()
+    Agent agent;
+    Rigidbody rb;
+    private float speed = 2;
+    private void Awake()
+    {
+        rb = gameObject.GetComponent<Rigidbody>();
+        agent = GetComponent<Agent>();
+    }
+    public void Start()
     {
         playerCamera = Camera.main;
-       // playerCamera = GetComponentInChildren<Camera>();
-        agent = GetComponent<NavMeshAgent>();
+        // playerCamera = GetComponentInChildren<Camera>();
     }
-    
-    void Update()
+
+    public void Update()
     {
+        Vector3 targetPos = agent.followTarget.position;
+
+        if (Vector3.Distance(transform.position, targetPos) <= 1)
+        {
+            Debug.Log("Made it to check point");
+
+            transform.transform.localRotation = agent.followTarget.localRotation;
+        }
+
+
         //Will become the logic for clicking on the screen to kill enemies
         RaycastHit hit;
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
@@ -29,14 +44,27 @@ public class Player : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             Vector3 PointHit = hit.point;
-            agent.SetDestination(PointHit);
+            //agent.SetDestination(PointHit);
         }
-    }  
-    
-    public void MoveTowards(Transform position)
+
+        //INPUT MouseClick
+
+    }
+    public void Shoot()
     {
-        //Move the player to make him face that way
-        //(B - A).normalized * speed;
-        //NavMesh is a good strategy
+
+    }
+
+
+    public void MoveTowards(Transform targetPos)
+    {
+        agent.followTarget = targetPos;
+
+
+    }
+
+    public Vector3 GetCurrentPosition()
+    {
+        return transform.position;
     }
 }

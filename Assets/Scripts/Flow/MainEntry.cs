@@ -4,11 +4,14 @@ using UnityEngine;
 public class MainEntry : MonoBehaviour
 {
     List<IFlow> listManagers = new List<IFlow>();
+    public Connector connector;
 
     private void Awake()
     {
+        connector.Connect();
+
         //populer la liste des managers qui implementent 
-        //listManagers.Add(PlayerManager.Instance);
+        listManagers.Add(PlayerManager.Instance);
         //listManagers.Add(BulletManager.Instance);
         //listManagers.Add(EnemyManager.Instance);
         //listManagers.Add(LevelManager.Instance);
@@ -28,6 +31,7 @@ public class MainEntry : MonoBehaviour
         {
             manager.Initialize();
         }
+       
 
     }
 
