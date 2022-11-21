@@ -7,6 +7,8 @@ TagManager:
   - Zombie
   - BreakDancer
   - Head
+  - HeadBreakDancer
+  - HeadZombie
   layers:
   - Default
   - TransparentFX

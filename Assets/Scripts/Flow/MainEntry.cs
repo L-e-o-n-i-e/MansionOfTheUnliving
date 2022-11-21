@@ -12,6 +12,7 @@ public class MainEntry : MonoBehaviour
         
         listManagers.Add(PlayerManager.Instance);
         listManagers.Add(EnemyManager.Instance);
+        listManagers.Add(CheckPointManager.Instance);
         UIManager.Instance.StartGame();
 
 

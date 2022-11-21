@@ -54,32 +54,38 @@ public class Player : MonoBehaviour
     {
         //TODO
         //If player bullet hits an enemy, it makes a squish sound, if it misses, it makes a miss sound.
-        audioSource.Play();
-
-        //TODO
+               
         RaycastHit hit;
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit))
         {
-            Debug.Log("Hit " + hit.transform.tag);
+            System.Type type = hit.GetType();
+
             if(hit.transform.tag == "Zombie")
             {
-
+                EnemyManager.Instance.GotHit(type, hit.transform, "Zombie");
             }
             else if (hit.transform.tag == "BreakDancer")
             {
-
-            }else if(hit.transform.tag == "Head")
-            {
+                EnemyManager.Instance.GotHit(type, hit.transform, "BreakDancer");
 
             }
+            else if(hit.transform.tag == "HeadZombie")
+            {
+                EnemyManager.Instance.GotHit(type, hit.transform, "HeadZombie");
 
-           Vector3 PointHit = hit.point;
-            //agent.SetDestination(PointHit);
+            }
+            else if (hit.transform.tag == "HeadBreakDancer")
+            {
+                EnemyManager.Instance.GotHit(type, hit.transform, "HeadBreakDancer");
+            }
+            else
+            {
+                audioSource.Play();
+            }
         }
     }
-
 
     public void MoveTowards(Transform targetPos)
     {

@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 4122558392134526651}
   m_Layer: 8
   m_Name: mixamorig:Head
-  m_TagString: Head
+  m_TagString: HeadBreakDancer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1934,7 +1934,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7766812248629812816}
   - component: {fileID: 7677261510820742484}
-  - component: {fileID: 3417089291461744240}
   - component: {fileID: -1245673498140346719}
   - component: {fileID: 8152476366625279364}
   m_Layer: 8
@@ -1981,19 +1980,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &3417089291461744240
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6954281554131272938}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.7, y: 1.8, z: 1}
-  m_Center: {x: 0, y: 0.83, z: 0}
 --- !u!195 &-1245673498140346719
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2069,6 +2055,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2853329818847936196}
+  - component: {fileID: 5330554897245445179}
   m_Layer: 8
   m_Name: mixamorig:Hips
   m_TagString: Untagged
@@ -2094,6 +2081,20 @@ Transform:
   m_Father: {fileID: 7766812248629812816}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &5330554897245445179
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7153681547624327089}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.24000064
+  m_Height: 1.18909
+  m_Direction: 1
+  m_Center: {x: -0.010128498, y: -0.047272682, z: -6.2497714e-19}
 --- !u!1 &7637197082256560539
 GameObject:
   m_ObjectHideFlags: 0

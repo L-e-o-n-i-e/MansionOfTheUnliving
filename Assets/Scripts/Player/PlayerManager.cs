@@ -36,6 +36,7 @@ public class PlayerManager : IFlow
 
     public bool hasArrived = false;
     public bool exitCheckPoint = false;
+    public bool playerDied = false;
     
       public void PreInitialize()
     {
@@ -51,30 +52,23 @@ public class PlayerManager : IFlow
 
     public void Refresh()
     {
-        if(hasArrived == true)
+        if (!playerDied)
         {
-            EnemyManager.Instance.playerHasArrived = true;
-            player.action = true;
+            //Get to CheckPoint
+            if (hasArrived == true)
+            {
+                EnemyManager.Instance.playerHasArrived = true;
+                player.action = true;
+            }
+
+            //Leave CheckPoint
+            if (Time.time >= timeToLeaveCheckPoint)
+            {
+                hasArrived = false;
+                Transform target = CheckPointManager.Instance.GetTransformCheckPoint();
+                player.MoveTowards(target);
+            }
         }
-
-
-        //TransitionToAction
-
-        //Action
-        //player.Update();
-        //if all enemies are dead : WaitingBeforeLeaving 
-        //timeToLeaveCheckPoint = Time.time + timeBeforeLeaving;
-
-        //if(Time.time >= timeToLeaveCheckPoint)
-        //    exitCheckPoint = true;
-
-        //WaitingBeforeLeaving
-        if (exitCheckPoint) {
-            
-            Transform target = CheckPointManager.Instance.GetTransformCheckPoint();
-            player.MoveTowards(target);
-        }
-        // hasArrived = false; 
 
     }
 
@@ -96,6 +90,11 @@ public class PlayerManager : IFlow
     public Transform GetPlayerTransform()
     {
         return player.transform;
+    }
+
+    public void WaitingBeforeLeaving()
+    {
+        timeToLeaveCheckPoint = Time.time + timeBeforeLeaving;
     }
 
 }

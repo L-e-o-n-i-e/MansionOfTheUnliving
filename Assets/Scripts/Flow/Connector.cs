@@ -7,6 +7,7 @@ public class Connector : MonoBehaviour
 {
     public GameObject playerPrefab;
     public List<CheckPoint> CheckPoints = new List<CheckPoint>();
+
     [Header("UI Elements")]
     public RectTransform hpPanel;
     public RectTransform lifePanel;

@@ -45,17 +45,19 @@ public class CheckPointManager : IFlow
     public void EndGame()
     {
     }
-    //public void GoToNextCheckPoint()
-    //{
-    //    indexCurrentCheckPoint++;
-    //    list[indexCurrentCheckPoint].MoveToCheckPoint(camPos);
 
-    //    if (indexCurrentCheckPoint == list.Count - 1)
-    //    {
-    //        LevelFinished();
-    //    }
+    public void GoToNextCheckPoint()
+    {
+        indexCurrentCheckPoint++;
 
-    //}
+        if (indexCurrentCheckPoint == list.Count - 1)
+        {
+            LevelFinished();
+        }
+
+        PlayerManager.Instance.WaitingBeforeLeaving();
+
+    }
 
     public void LevelFinished()
     {
