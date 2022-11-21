@@ -31,9 +31,11 @@ public class PlayerManager : IFlow
     private Player player;
 
     private Vector3 START_POSITION = new Vector3(-9, 1, 10);
+    public int START_HP = 3;
+    public int START_AMMO = 5;
 
-    bool hasArrived = false;
-    bool exitCheckPoint = false;
+    public bool hasArrived = false;
+    public bool exitCheckPoint = false;
     
       public void PreInitialize()
     {
@@ -49,31 +51,28 @@ public class PlayerManager : IFlow
 
     public void Refresh()
     {
-        player.Update();
+        if(hasArrived == true)
+        {
+            EnemyManager.Instance.playerHasArrived = true;
+            player.action = true;
+        }
 
-        //MovingState
-
-        //if (!hasArrived)
-        //{
-        //    Vector3 target = CheckPointManager.Instance.GetTargetCheckPoint();
-        //    MoveToCheckPoint(target);
-        //}
-        
-        
-        //else if (Time.time >= timeToStop)
-        //{
-        //    hasArrived = true;
-        //}
 
         //TransitionToAction
 
         //Action
-        player.Update();
-        //if all enemies are dead : exitCheckPoint =  true;
+        //player.Update();
+        //if all enemies are dead : WaitingBeforeLeaving 
+        //timeToLeaveCheckPoint = Time.time + timeBeforeLeaving;
+
+        //if(Time.time >= timeToLeaveCheckPoint)
+        //    exitCheckPoint = true;
 
         //WaitingBeforeLeaving
         if (exitCheckPoint) {
-            timeToLeaveCheckPoint = Time.time + timeBeforeLeaving;
+            
+            Transform target = CheckPointManager.Instance.GetTransformCheckPoint();
+            player.MoveTowards(target);
         }
         // hasArrived = false; 
 
@@ -87,20 +86,6 @@ public class PlayerManager : IFlow
     {
     }
 
-    public void OnEnterCheckPoint()
-    {
-
-    }
-    public void OnUpdateCheckPoint()
-    {
-
-    }
-
-    public void OnExitCheckPoint()
-    {
-
-    }
-
     public void SpawnPlayer()
     {
         GameObject playerToClone = GameObject.Instantiate<GameObject>(playerPrefab);
@@ -108,20 +93,9 @@ public class PlayerManager : IFlow
         player.transform.position = START_POSITION;
     }
 
-    public void MoveToCheckPoint(Vector3 TargetPos)
+    public Transform GetPlayerTransform()
     {
-        if (Time.time < timeToStop)
-        {
-            while (player.transform.position != TargetPos)
-            {
-                //Timer to lerp from current player position to checkpoint position
-                
-                //Move the player to make him face that way
-                //(B - A).normalized * speed;
-                //NavMesh is a good strategy
-
-            }
-        }
+        return player.transform;
     }
 
 }

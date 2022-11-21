@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
 {
-    public int nbZombies = 3;
+    public int nbZombies = 2;
     public int nbBreakdancers = 1;
     bool arrived = false;
-    Transform spawnArea;
-
     
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Player is on checkPoint");
+        if (other.transform.tag == "Player")
+        {
+            arrived = true;
+        }
+    }
+
     public void ArrivedAtCheckPoint()
     {
         arrived = true;
@@ -25,9 +32,4 @@ public class CheckPoint : MonoBehaviour
         arrived = false;
     }
 
-
-    public Transform getSpawnArea()
-    {
-        return spawnArea;
-    }
 }

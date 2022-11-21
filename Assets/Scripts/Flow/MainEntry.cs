@@ -9,13 +9,10 @@ public class MainEntry : MonoBehaviour
     private void Awake()
     {
         connector.Connect();
-
-        //populer la liste des managers qui implementent 
+        
         listManagers.Add(PlayerManager.Instance);
-        //listManagers.Add(BulletManager.Instance);
-        //listManagers.Add(EnemyManager.Instance);
-        //listManagers.Add(LevelManager.Instance);
-        //listManagers.Add(UIManager.Instance);
+        listManagers.Add(EnemyManager.Instance);
+        UIManager.Instance.StartGame();
 
 
         foreach (var manager in listManagers)
@@ -26,7 +23,6 @@ public class MainEntry : MonoBehaviour
 
     private void Start()
     {
-        //for loop qui appelle initialize sur tous les managers
         foreach (var manager in listManagers)
         {
             manager.Initialize();

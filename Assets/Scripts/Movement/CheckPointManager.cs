@@ -22,26 +22,15 @@ public class CheckPointManager : IFlow
     #endregion
 
     GameObject checkPoint;
-    Transform camPos;
     public List<CheckPoint> list = new List<CheckPoint>();
     int indexCurrentCheckPoint = 0;
 
     public void PreInitialize()
     {
-        camPos = Camera.main.transform;
-
-        int nbOfChild = checkPoint.transform.childCount;
-
-        for (int i = 0; i < nbOfChild; i++)
-        {
-            CheckPoint cp = checkPoint.transform.GetComponentInChildren<CheckPoint>();
-            list.Add(cp);
-        }
     }
 
     public void Initialize()
     {
-        //list[indexCurrentCheckPoint].MoveToCheckPoint(camPos);
     }
 
     public void Refresh()
@@ -73,12 +62,15 @@ public class CheckPointManager : IFlow
 
     }
 
-    public Vector3 GetTargetCheckPoint()
-    {
-       return list[indexCurrentCheckPoint].transform.position;
-    }
     public Transform GetTransformCheckPoint()
     {
         return list[indexCurrentCheckPoint].transform;
+    }
+
+    public void GetNbEnemiesToSpawn(out int nbZombies, out int nbBreakDancers, out Transform spawnArea)
+    {
+        nbBreakDancers = list[indexCurrentCheckPoint].nbBreakdancers;
+        nbZombies = list[indexCurrentCheckPoint].nbZombies;
+        spawnArea = list[indexCurrentCheckPoint].transform.GetChild(0);
     }
 }
