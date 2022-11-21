@@ -43,6 +43,7 @@ public class Zombie : MonoBehaviour
 
     public bool GetDmg(string tag)
     {
+        Debug.Log(name + "Got hit");
         currentHp--;
 
         if (currentHp <= 0 | tag == "HeadZombie")

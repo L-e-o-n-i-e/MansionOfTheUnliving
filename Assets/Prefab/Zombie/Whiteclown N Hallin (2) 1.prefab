@@ -1936,6 +1936,7 @@ GameObject:
   - component: {fileID: 7677261510820742484}
   - component: {fileID: -1245673498140346719}
   - component: {fileID: 8152476366625279364}
+  - component: {fileID: 5647306795471250336}
   m_Layer: 8
   m_Name: Whiteclown N Hallin (2) 1
   m_TagString: BreakDancer
@@ -2015,6 +2016,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTarget: {fileID: 4365891160774620705, guid: f594325b01f6ed9448daaf446e0f894a, type: 3}
+--- !u!114 &5647306795471250336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6954281554131272938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a449a6ce3c8932d41a3bf0e002bf609d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  START_HP: 1000
 --- !u!1 &7074474494890266830
 GameObject:
   m_ObjectHideFlags: 0
@@ -2058,7 +2072,7 @@ GameObject:
   - component: {fileID: 5330554897245445179}
   m_Layer: 8
   m_Name: mixamorig:Hips
-  m_TagString: Untagged
+  m_TagString: BreakDancer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

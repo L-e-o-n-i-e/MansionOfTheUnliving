@@ -60,30 +60,34 @@ public class Player : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            System.Type type = hit.GetType();
+      
+            string tag = hit.transform.tag;
+            Debug.Log(tag + "hit");
 
-            if(hit.transform.tag == "Zombie")
-            {
-                EnemyManager.Instance.GotHit(type, hit.transform, "Zombie");
-            }
-            else if (hit.transform.tag == "BreakDancer")
-            {
-                EnemyManager.Instance.GotHit(type, hit.transform, "BreakDancer");
+            EnemyManager.Instance.GotHit(hit.transform, tag);
 
-            }
-            else if(hit.transform.tag == "HeadZombie")
-            {
-                EnemyManager.Instance.GotHit(type, hit.transform, "HeadZombie");
+            //if (hit.transform.tag == "Zombie")
+            //{
+            //    EnemyManager.Instance.GotHit( hit.transform, "Zombie");
+            //}
+            //else if (hit.transform.tag == "BreakDancer")
+            //{
+            //    EnemyManager.Instance.GotHit( hit.transform, "BreakDancer");
 
-            }
-            else if (hit.transform.tag == "HeadBreakDancer")
-            {
-                EnemyManager.Instance.GotHit(type, hit.transform, "HeadBreakDancer");
-            }
-            else
-            {
+            //}
+            //else if(hit.transform.tag == "HeadZombie")
+            //{
+            //    EnemyManager.Instance.GotHit( hit.transform, "HeadZombie");
+
+            //}
+            //else if (hit.transform.tag == "HeadBreakDancer")
+            //{
+            //    EnemyManager.Instance.GotHit( hit.transform, "HeadBreakDancer");
+            //}
+            //else
+            //{
                 audioSource.Play();
-            }
+            
         }
     }
 

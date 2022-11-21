@@ -1026,7 +1026,7 @@ GameObject:
   - component: {fileID: 7271185845708622756}
   m_Layer: 8
   m_Name: mixamorig:Hips
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1108,6 +1108,7 @@ GameObject:
   - component: {fileID: 1640263209670336014}
   - component: {fileID: -4654172415007324157}
   - component: {fileID: -5268944716993128446}
+  - component: {fileID: 5076017103795693362}
   m_Layer: 8
   m_Name: Zombiegirl W Kurniawan (1) 1
   m_TagString: Zombie
@@ -1189,6 +1190,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5076017103795693362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3447670565440950568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f012a38164ad334f9f0f4dcbc787868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  START_HP: 2
 --- !u!1 &3570385331235838868
 GameObject:
   m_ObjectHideFlags: 0

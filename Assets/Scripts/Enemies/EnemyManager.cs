@@ -47,10 +47,15 @@ public class EnemyManager : IFlow
             SpawnEnemies();
         }
 
-        //if(zombies.Count == 0 && breakDancers.Count == 0)
-        //{
-        //    CheckPointManager.Instance.GoToNextCheckPoint();
-        //}
+        if (enemiesSpawned && zombies.Count == 0 && breakDancers.Count == 0)
+        {
+            CheckPointManager.Instance.GoToNextCheckPoint();
+            enemiesSpawned = false;
+
+            //TODO check qui spawn les ennemies.
+            //Player hasArrived bool!
+        }
+        
     }
 
     public void PhysicsRefresh()
@@ -105,30 +110,30 @@ public class EnemyManager : IFlow
         return new Vector3(x, 1, z);
     }
 
-    public void GotHit(System.Type type, Transform enemy, string tag)
+    public void GotHit( Transform enemy, string tag)
     {
         bool deadEnemy = false;
 
-        //If Enemy is a Zombie
-        if (type.ToString() == "Zombie"){
-            Zombie zombie = enemy.GetComponent<Zombie>();
+        if (tag == "Zombie" || tag == "HeadZombie")
+        {
+            Zombie zombie = enemy.GetComponentInParent<Zombie>();
             deadEnemy = zombie.GetDmg(tag);
-
+            
             if (deadEnemy)
             {
                 RemoveZombieFromList(zombie);
             }
         }
-        //If enemy is a BreakDancer
-        else if(type.ToString() == "BreakDancer"){
-            BreakDancer bd = enemy.GetComponent<BreakDancer>();
+        else if (tag == "BreakDancer" || tag == "HeadBreakDancer")
+        {
+            BreakDancer bd = enemy.GetComponentInParent<BreakDancer>();
             deadEnemy = bd.GetDmg(tag);
 
             if (deadEnemy)
             {
                 RemoveBreakDancerFromList(bd);
             }
-        }   
+        }            
     }
 
     public void HitPlayer()
@@ -158,4 +163,5 @@ public class EnemyManager : IFlow
     {
         breakDancers.Add(breakDancer);
     }
+
 }
