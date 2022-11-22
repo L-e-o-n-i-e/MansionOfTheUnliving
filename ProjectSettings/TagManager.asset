@@ -9,6 +9,7 @@ TagManager:
   - Head
   - HeadBreakDancer
   - HeadZombie
+  - Ammo
   layers:
   - Default
   - TransparentFX

@@ -35,15 +35,16 @@ public class PlayerManager : IFlow
     public int START_AMMO = 5;
 
     public bool hasArrived = false;
-    public bool exitCheckPoint = false;
+    public bool targetAssigned = false;
     public bool playerDied = false;
-    
-      public void PreInitialize()
+    public bool checkPointAssigned = false;
+
+    public void PreInitialize()
     {
         timeToStop = Time.time + timeBeforeStop;
         SpawnPlayer();
-        Transform target = CheckPointManager.Instance.GetTransformCheckPoint();
-        player.MoveTowards(target);
+        //Transform target = CheckPointManager.Instance.GetTransformCheckPoint();
+        //player.MoveTowards(target);
     }
 
     public void Initialize()
@@ -52,24 +53,51 @@ public class PlayerManager : IFlow
 
     public void Refresh()
     {
-        if (!playerDied)
-        {
-            //Get to CheckPoint
-            if (hasArrived == true)
-            {
-                EnemyManager.Instance.playerHasArrived = true;
-                player.action = true;
-            }
+        CHeckPointPhase phase = CheckPointManager.Instance.GetCheckPointPhase();
 
-            //Leave CheckPoint
-            if (Time.time >= timeToLeaveCheckPoint)
+        //if (!playerDied)
+        //{
+            switch (phase)
             {
-                hasArrived = false;
-                Transform target = CheckPointManager.Instance.GetTransformCheckPoint();
-                player.MoveTowards(target);
-            }
-        }
+                case CHeckPointPhase.Moving:
+                    if (!targetAssigned)
+                    {
+                        Transform target = CheckPointManager.Instance.GetTransformCheckPoint();
+                        player.MoveTowards(target);
+                        targetAssigned = true;
+                    }
 
+                    break;
+                case CHeckPointPhase.GetInPosition:
+
+                    if (hasArrived == true)
+                    {
+                        checkPointAssigned = false;
+                        CheckPointManager.Instance.phase = CHeckPointPhase.Spawning;
+                    }
+
+                    break;
+                case CHeckPointPhase.Action:
+
+                    player.action = true;
+
+                    break;
+                case CHeckPointPhase.WaitingBreforeLeaving:
+
+                    targetAssigned = false;
+                    hasArrived = false;
+
+                    if (Time.time >= timeToLeaveCheckPoint && !checkPointAssigned)
+                    {
+                        CheckPointManager.Instance.GoToNextCheckPoint();
+                        CheckPointManager.Instance.phase = CHeckPointPhase.Moving;
+                        checkPointAssigned = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        //}
     }
 
     public void PhysicsRefresh()
@@ -97,4 +125,9 @@ public class PlayerManager : IFlow
         timeToLeaveCheckPoint = Time.time + timeBeforeLeaving;
     }
 
+    public void PlayerTransitionToNextCheckPoint()
+    {
+        hasArrived = false;
+        player.action = false;
+    }
 }

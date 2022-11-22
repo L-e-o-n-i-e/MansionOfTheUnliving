@@ -561,7 +561,7 @@ GameObject:
   - component: {fileID: -2525111157129129823}
   m_Layer: 6
   m_Name: BoxAmmo
-  m_TagString: Untagged
+  m_TagString: Ammo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -681,6 +681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b759ae2093813e49aae8c5278811190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nbOfAmmo: 3
 --- !u!1001 &2527012205751576800
 PrefabInstance:
   m_ObjectHideFlags: 0

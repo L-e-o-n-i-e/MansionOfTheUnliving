@@ -24,13 +24,14 @@ public class EnemyManager : IFlow
     #endregion
 
 
-    public bool playerHasArrived = false;
+    //public bool playerHasArrived = false;
     public GameObject zombiePrefab;
     public GameObject breakDancerPrefab;
     public float colliderBuffer = .7f;
     private bool enemiesSpawned = false;
     public List<BreakDancer> breakDancers = new List<BreakDancer>();
     public List<Zombie> zombies = new List<Zombie>();
+    private CHeckPointPhase cpPhase = CHeckPointPhase.Moving;
 
     public void PreInitialize()
     {
@@ -42,20 +43,32 @@ public class EnemyManager : IFlow
 
     public void Refresh()
     {
-        if (playerHasArrived == true && !enemiesSpawned)
-        {
-            SpawnEnemies();
-        }
+        CHeckPointPhase phase = CheckPointManager.Instance.GetCheckPointPhase();
 
-        if (enemiesSpawned && zombies.Count == 0 && breakDancers.Count == 0)
+        switch (phase)
         {
-            CheckPointManager.Instance.GoToNextCheckPoint();
-            enemiesSpawned = false;
+            case CHeckPointPhase.Spawning:
 
-            //TODO check qui spawn les ennemies.
-            //Player hasArrived bool!
+                if (!enemiesSpawned)
+                {
+                    SpawnEnemies();
+                    CheckPointManager.Instance.phase = CHeckPointPhase.Action;
+                }
+
+                break;
+            case CHeckPointPhase.Action:
+
+                if (enemiesSpawned && zombies.Count == 0 && breakDancers.Count == 0)
+                {                    
+                    PlayerManager.Instance.WaitingBeforeLeaving();
+
+                    enemiesSpawned = false;
+                    CheckPointManager.Instance.phase = CHeckPointPhase.WaitingBreforeLeaving;
+                }
+                break;
+            default:
+                break;
         }
-        
     }
 
     public void PhysicsRefresh()
@@ -110,7 +123,7 @@ public class EnemyManager : IFlow
         return new Vector3(x, 1, z);
     }
 
-    public void GotHit( Transform enemy, string tag)
+    public void GotHit(Transform enemy, string tag)
     {
         bool deadEnemy = false;
 
@@ -118,7 +131,7 @@ public class EnemyManager : IFlow
         {
             Zombie zombie = enemy.GetComponentInParent<Zombie>();
             deadEnemy = zombie.GetDmg(tag);
-            
+
             if (deadEnemy)
             {
                 RemoveZombieFromList(zombie);
@@ -133,7 +146,7 @@ public class EnemyManager : IFlow
             {
                 RemoveBreakDancerFromList(bd);
             }
-        }            
+        }
     }
 
     public void HitPlayer()

@@ -5,11 +5,12 @@ using UnityEngine;
 public class BreakDancer :MonoBehaviour
 {
     Animator animator;
-    public float START_HP = 1000;
-    float currentHp = 2;
     EnemyType Zombie;
     Transform target;
-    float TimeBeforeDisapear = 4;
+    public AmmoBox boxPrefab;
+    public float START_HP = 1000;
+    float currentHp = 1000;
+    float TimeBeforeDisapear = 2;
     float TimeToDisapear;
     bool dead = false;
 
@@ -17,6 +18,7 @@ public class BreakDancer :MonoBehaviour
     {
         animator = GetComponent<Animator>();
         target = GetComponent<Agent>().followTarget.transform;
+       
     }
     private void Update()
     {
@@ -31,7 +33,7 @@ public class BreakDancer :MonoBehaviour
         float distance = Vector3.Distance(transform.position, target.position);
         animator.SetFloat("TargetDistance", distance);
 
-        if(distance < .5f)
+        if(distance < 2f)
         {
             EnemyManager.Instance.HitPlayer();
         }
@@ -44,8 +46,8 @@ public class BreakDancer :MonoBehaviour
 
     public bool GetDmg(string tag)
     {
-        Debug.Log(name + "Got hit");
         currentHp--;
+        //Debug.Log(name + "Got hit :  currentHp = " + currentHp);
 
         if (currentHp <= 0 | tag == "HeadBreakDancer")
         {
@@ -61,6 +63,15 @@ public class BreakDancer :MonoBehaviour
         TimeToDisapear = Time.time + TimeBeforeDisapear;
 
         animator.SetTrigger("Dead");
-        dead = true;
+
+        //50% of dropping Ammo
+        int nb = Random.Range(0, 2);
+        if (nb == 0)
+        {
+            AmmoBox ammo = GameObject.Instantiate<AmmoBox>(boxPrefab);
+            ammo.transform.position = transform.position;
+        }
+
+      dead = true;
     }
 }

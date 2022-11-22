@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager 
+public class UIManager
 {
     #region Singleton
     //SINGLETON! REMOVE MONOBEHAVIOR
@@ -28,7 +28,7 @@ public class UIManager
     public Image ammoImgPrefab;
 
     public int MAX_AMMO = 10;
-        
+
     public void StartGame()
     {
         for (int i = 0; i < PlayerManager.Instance.START_AMMO; i++)
@@ -52,7 +52,8 @@ public class UIManager
 
     public void LoseAmmo()
     {
-        ammoPanel.GetChild(ammoPanel.childCount - 1).GetComponent<Image>().enabled = false;
+        if (ammoPanel.childCount != 0)
+            ammoPanel.GetChild(ammoPanel.childCount - 1).GetComponent<Image>().enabled = false;
     }
 
     public void AddHp()

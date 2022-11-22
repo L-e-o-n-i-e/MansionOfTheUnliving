@@ -2028,6 +2028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a449a6ce3c8932d41a3bf0e002bf609d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boxPrefab: {fileID: -2525111157129129823, guid: 884c362fb83542b4589582056ddc21cb, type: 3}
   START_HP: 1000
 --- !u!1 &7074474494890266830
 GameObject:

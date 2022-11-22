@@ -8,9 +8,10 @@ public class Zombie : MonoBehaviour
     public float START_HP = 2;
     float currentHp = 2;
     Transform target;
-    float TimeBeforeDisapear = 4;
+    float TimeBeforeDisapear = 2;
     float TimeToDisapear;
     bool dead = false;
+    public AmmoBox boxPrefab;
 
     private void Awake()
     {
@@ -19,6 +20,14 @@ public class Zombie : MonoBehaviour
     }
     private void Update()
     {
+        float distance = Vector3.Distance(transform.position, target.position);
+        animator.SetFloat("TargetDistance", distance);
+
+        if (distance < 2.5f)
+        {
+            EnemyManager.Instance.HitPlayer();
+        }
+
         if (dead && Time.time >= TimeToDisapear)
         {
             GameObject.Destroy(gameObject);
@@ -27,13 +36,7 @@ public class Zombie : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float distance = Vector3.Distance(transform.position, target.position);
-        animator.SetFloat("TargetDistance", distance);
-
-        if (distance < .5f)
-        {
-            EnemyManager.Instance.HitPlayer();
-        }
+     
     }
 
     public float GetCurrentHp()
@@ -43,8 +46,8 @@ public class Zombie : MonoBehaviour
 
     public bool GetDmg(string tag)
     {
-        Debug.Log(name + "Got hit");
         currentHp--;
+        //Debug.Log(name + "Got hit :  currentHp = " + currentHp);
 
         if (currentHp <= 0 | tag == "HeadZombie")
         {
@@ -59,6 +62,15 @@ public class Zombie : MonoBehaviour
     {
         TimeToDisapear = Time.time + TimeBeforeDisapear;
         animator.SetTrigger("Dead");
+
+        //50% of dropping Ammo
+        int nb = Random.Range(0, 2);
+        if (nb == 0)
+        {
+            AmmoBox ammo = GameObject.Instantiate<AmmoBox>(boxPrefab);
+            ammo.transform.position = transform.position;
+        }
+
         dead = true;
     }
 }

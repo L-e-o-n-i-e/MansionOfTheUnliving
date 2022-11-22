@@ -27,7 +27,6 @@ public class Player : MonoBehaviour
     public void Start()
     {
         playerCamera = Camera.main;
-        // playerCamera = GetComponentInChildren<Camera>();
     }
 
     public void Update()
@@ -42,60 +41,50 @@ public class Player : MonoBehaviour
     }
     public void FixedUpdate()
     {
-        Vector3 targetPos = agent.followTarget.position;
+        CHeckPointPhase phase = CheckPointManager.Instance.GetCheckPointPhase();
 
-        if (Vector3.Distance(transform.position, targetPos) <= 1)
+        if (phase == CHeckPointPhase.Moving || phase == CHeckPointPhase.GetInPosition)
         {
-            SetProperAngle();
+            Vector3 targetPos = agent.followTarget.position;
+
+            if (Vector3.Distance(transform.position, targetPos) <= .7f)
+            {
+                SetProperAngle();
+            }
         }
     }
 
     public void Shoot()
     {
-        //TODO
-        //If player bullet hits an enemy, it makes a squish sound, if it misses, it makes a miss sound.
-               
+        audioSource.Play();
+        UIManager.Instance.LoseAmmo();
+
         RaycastHit hit;
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit))
         {
-      
+
             string tag = hit.transform.tag;
             Debug.Log(tag + "hit");
-
+            if (tag == "Ammo")
+            {
+                int nbAmmo = hit.collider.transform.GetComponent<AmmoBox>().nbOfAmmo;
+                for (int i = 0; i < nbAmmo; i++)
+                {
+                    UIManager.Instance.AddAmmo();
+                }
+                GameObject.Destroy(hit.collider.gameObject);
+            }
             EnemyManager.Instance.GotHit(hit.transform, tag);
+            //TODO: squish sound       
 
-            //if (hit.transform.tag == "Zombie")
-            //{
-            //    EnemyManager.Instance.GotHit( hit.transform, "Zombie");
-            //}
-            //else if (hit.transform.tag == "BreakDancer")
-            //{
-            //    EnemyManager.Instance.GotHit( hit.transform, "BreakDancer");
-
-            //}
-            //else if(hit.transform.tag == "HeadZombie")
-            //{
-            //    EnemyManager.Instance.GotHit( hit.transform, "HeadZombie");
-
-            //}
-            //else if (hit.transform.tag == "HeadBreakDancer")
-            //{
-            //    EnemyManager.Instance.GotHit( hit.transform, "HeadBreakDancer");
-            //}
-            //else
-            //{
-                audioSource.Play();
-            
         }
     }
 
     public void MoveTowards(Transform targetPos)
     {
         agent.followTarget = targetPos;
-
-
     }
 
     public void SetProperAngle()
@@ -108,12 +97,8 @@ public class Player : MonoBehaviour
         }
         else
         {
+            CheckPointManager.Instance.phase = CHeckPointPhase.GetInPosition;
             PlayerManager.Instance.hasArrived = true;
         }
-    }
-
-    public Vector3 GetCurrentPosition()
-    {
-        return transform.position;
     }
 }

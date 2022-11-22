@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CHeckPointPhase { Moving, GetInPosition, Spawning, Action, WaitingBreforeLeaving}
 public class CheckPointManager : IFlow
 {
     #region Singleton
@@ -24,6 +25,7 @@ public class CheckPointManager : IFlow
     GameObject checkPoint;
     public List<CheckPoint> list = new List<CheckPoint>();
     int indexCurrentCheckPoint = 0;
+    public CHeckPointPhase phase = CHeckPointPhase.Moving;
 
     public void PreInitialize()
     {
@@ -35,6 +37,24 @@ public class CheckPointManager : IFlow
 
     public void Refresh()
     {
+        switch (phase)
+        {
+            case CHeckPointPhase.Moving:
+
+                break;
+            case CHeckPointPhase.GetInPosition:
+
+                break;
+            case CHeckPointPhase.Spawning:
+
+                break;
+            case CHeckPointPhase.Action:
+                break;
+            case CHeckPointPhase.WaitingBreforeLeaving:
+                break;
+            default:
+                break;
+        }
 
     }
 
@@ -49,14 +69,12 @@ public class CheckPointManager : IFlow
     public void GoToNextCheckPoint()
     {
         indexCurrentCheckPoint++;
+        Debug.Log("checkpoint # :" + indexCurrentCheckPoint);
 
         if (indexCurrentCheckPoint == list.Count - 1)
         {
             LevelFinished();
         }
-
-        PlayerManager.Instance.WaitingBeforeLeaving();
-
     }
 
     public void LevelFinished()
@@ -74,5 +92,10 @@ public class CheckPointManager : IFlow
         nbBreakDancers = list[indexCurrentCheckPoint].nbBreakdancers;
         nbZombies = list[indexCurrentCheckPoint].nbZombies;
         spawnArea = list[indexCurrentCheckPoint].transform.GetChild(0);
+    }
+
+    public CHeckPointPhase GetCheckPointPhase()
+    {
+        return phase;
     }
 }
